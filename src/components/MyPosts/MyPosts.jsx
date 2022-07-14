@@ -1,5 +1,6 @@
 import styles from "./MyPosts.module.css";
 import React from "react";
+import Post from "../Post/Post";
 
 
 
@@ -12,14 +13,8 @@ const MyPosts = () => {
                 <button type='submit' className={styles.button}>Send</button>
             </div>
             <div className={styles.posts}>
-                <div className={styles.post}>
-                    <div className={styles.round}/>
-                    <p className={styles.postText}>Hey why nobody loves me</p>
-                </div>
-                <div className={styles.post}>
-                    <div className={styles.round}/>
-                    <p className={styles.postText}>Its my new app hey</p>
-                </div>
+                <Post />
+                <Post />
             </div>
         </>
     )

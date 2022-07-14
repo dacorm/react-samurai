@@ -21,21 +21,3 @@
     display: flex;
     flex-direction: column;
 }
-
-.post {
-    display: flex;
-    gap: 20px;
-    padding-top: 35px;
-}
-
-.round {
-    width: 30px;
-    height: 30px;
-    border-radius: 15px;
-    background-color: orangered;
-    justify-self: flex-end;
-}
-
-.postText {
-    margin: 0;
-}
