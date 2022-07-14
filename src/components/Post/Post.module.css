@@ -8,7 +8,8 @@
     width: 30px;
     height: 30px;
     border-radius: 15px;
-    background-color: orangered;
+    background-image: url("./sPealEpjFy0.jpg");
+    background-size: cover;
     justify-self: flex-end;
 }
 

@@ -13,8 +13,8 @@ const MyPosts = () => {
                 <button type='submit' className={styles.button}>Send</button>
             </div>
             <div className={styles.posts}>
-                <Post />
-                <Post />
+                <Post message='Hey its my first post'/>
+                <Post message='Im writing social network'/>
             </div>
         </>
     )
