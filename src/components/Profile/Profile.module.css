@@ -1,0 +1,28 @@
+.content {
+    grid-area: content;
+    display: flex;
+    flex-direction: column;
+}
+
+.profileInfo {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    gap: 50px;
+    padding-top: 15px;
+}
+
+.avatar {
+    width: 150px;
+    height: 150px;
+    background-image: url("./sPealEpjFy0.jpg");
+    background-size: cover;
+}
+
+.text {
+    margin: 0 0 5px 0;
+}
+
+.text:first-of-type {
+    margin-bottom: 30px;
+}
+

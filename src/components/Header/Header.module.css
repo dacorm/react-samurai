@@ -1,0 +1,10 @@
+.header {
+    background-color: #0a880a;
+    display: flex;
+    grid-area: header;
+}
+
+.image {
+    height: 40px;
+    margin: 10px;
+}
