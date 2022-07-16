@@ -1,0 +1,18 @@
+.name {
+    margin-left: 10px;
+    align-self: center;
+    font-size: 25px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: black;
+    margin: auto 0;
+}
+
+.wrapper {
+    display: flex;
+    padding-bottom: 25px;
+}

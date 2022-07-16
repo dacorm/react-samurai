@@ -1,0 +1,14 @@
+.wrapper {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+}
+
+.dialogs {
+    display: flex;
+    flex-direction: column;
+}
+
+.dialog {
+    border-left: 1px solid blue;
+}
+

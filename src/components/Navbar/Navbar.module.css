@@ -16,3 +16,7 @@
 .item:nth-of-type(4) {
     margin-bottom: 35px;
 }
+
+.active {
+    color: orange;
+}
