@@ -2,10 +2,8 @@ import React from 'react';
 import styles from './Profile.module.css'
 import MyPosts from "../MyPosts/MyPosts";
 
-const Profile = ({props}) => {
+const Profile = ({ appState, addPost }) => {
 
-
-    console.log(props)
     return (
         <div className={styles.content}>
             <div className={styles.cover}>
@@ -21,7 +19,7 @@ const Profile = ({props}) => {
                     <p className={styles.text}>Website: none</p>
                 </div>
             </div>
-            <MyPosts posts={props}/>
+            <MyPosts posts={appState} addPost={addPost}/>
         </div>
     )
 }

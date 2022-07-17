@@ -4,13 +4,14 @@ import Post from "../Post/Post";
 
 
 
-const MyPosts = ({ posts }) => {
-    const postElements = posts.map(el => <Post message={el.message} id={el.id} key={el.id} />)
+const MyPosts = ({ posts, addPost }) => {
+    const postElements = posts.posts.map(el => <Post message={el.message} id={el.id} key={el.id} />)
     const postsRef = React.createRef();
 
     const handlePostSubmit = () => {
         const text = postsRef.current.value;
-        alert(text)
+        addPost(text);
+        postsRef.current.value = '';
     }
 
     return (
