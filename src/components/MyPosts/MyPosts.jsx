@@ -6,14 +6,19 @@ import Post from "../Post/Post";
 
 const MyPosts = ({ posts }) => {
     const postElements = posts.map(el => <Post message={el.message} id={el.id} key={el.id} />)
+    const postsRef = React.createRef();
 
+    const handlePostSubmit = () => {
+        const text = postsRef.current.value;
+        alert(text)
+    }
 
     return (
         <>
             <div className={styles.newpost}>
                 <h3 className={styles.title}>My post</h3>
-                <textarea placeholder='your news' className={styles.form}/>
-                <button type='submit' className={styles.button}>Send</button>
+                <textarea placeholder='your news' ref={postsRef} className={styles.form}/>
+                <button type='submit' onClick={handlePostSubmit} className={styles.button}>Send</button>
             </div>
             <div className={styles.posts}>
                 {
