@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Message.module.css';
 
-const Message = ({ author, text }) => {
+const Message = ({ author, text, id }) => {
     return (
         <div className={styles.message}>
             <div className={styles.avatar}>

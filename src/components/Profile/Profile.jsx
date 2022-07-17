@@ -2,7 +2,10 @@ import React from 'react';
 import styles from './Profile.module.css'
 import MyPosts from "../MyPosts/MyPosts";
 
-const Profile = () => {
+const Profile = ({props}) => {
+
+
+    console.log(props)
     return (
         <div className={styles.content}>
             <div className={styles.cover}>
@@ -18,7 +21,7 @@ const Profile = () => {
                     <p className={styles.text}>Website: none</p>
                 </div>
             </div>
-            <MyPosts />
+            <MyPosts posts={props}/>
         </div>
     )
 }

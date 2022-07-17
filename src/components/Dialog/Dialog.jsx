@@ -1,11 +1,13 @@
 import React from 'react';
 import styles from './Dialog.module.css';
+import {NavLink} from "react-router-dom";
 
-const Dialog = ({ name }) => {
+const Dialog = ({ name, id }) => {
+
     return (
         <div className={styles.wrapper}>
             <div className={styles.dot} />
-            <p className={styles.name}>{name}</p>
+            <NavLink to={id} className={styles.name}>{name}</NavLink>
         </div>
     )
 }

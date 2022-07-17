@@ -4,7 +4,10 @@ import Post from "../Post/Post";
 
 
 
-const MyPosts = () => {
+const MyPosts = ({ posts }) => {
+    const postElements = posts.map(el => <Post message={el.message} id={el.id} key={el.id} />)
+
+
     return (
         <>
             <div className={styles.newpost}>
@@ -13,8 +16,9 @@ const MyPosts = () => {
                 <button type='submit' className={styles.button}>Send</button>
             </div>
             <div className={styles.posts}>
-                <Post message='Hey its my first post'/>
-                <Post message='Im writing social network'/>
+                {
+                    postElements
+                }
             </div>
         </>
     )

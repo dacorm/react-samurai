@@ -2,7 +2,7 @@ import styles from "./Post.module.css";
 import React from "react";
 
 
-const Post = ({ message }) => {
+const Post = ({ message, id }) => {
     return (
         <>
         <div className={styles.post}>
