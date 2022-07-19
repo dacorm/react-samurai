@@ -14,8 +14,8 @@ function App(props) {
         <Navbar />
         <Routes>
             <Route path="/" element={<Profile {...props} />} />
-            <Route path='dialogs/:id' element={<Dialogs props={props.appState} />} />
-            <Route path='dialogs' element={<Dialogs props={props.appState} />} />
+            <Route path='dialogs/:id' element={<Dialogs {...props} />} />
+            <Route path='dialogs' element={<Dialogs {...props} />} />
         </Routes>
     </div>
   );

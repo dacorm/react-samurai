@@ -2,12 +2,12 @@ import React from 'react';
 import styles from './Profile.module.css'
 import MyPosts from "../MyPosts/MyPosts";
 
-const Profile = ({ appState, addPost }) => {
+const Profile = ({ appState, dispatch }) => {
 
     return (
         <div className={styles.content}>
             <div className={styles.cover}>
-                <img src='https://cdn.fishki.net/upload/post/2018/06/04/2615820/11.jpg' className='contentImage'/>
+                <img src='https://cdn.fishki.net/upload/post/2018/06/04/2615820/11.jpg' alt='Profile avatar' className='contentImage'/>
             </div>
             <div className={styles.profileInfo}>
                 <div className={styles.avatar}/>
@@ -19,7 +19,7 @@ const Profile = ({ appState, addPost }) => {
                     <p className={styles.text}>Website: none</p>
                 </div>
             </div>
-            <MyPosts posts={appState} addPost={addPost}/>
+            <MyPosts posts={appState} dispatch={dispatch} />
         </div>
     )
 }
