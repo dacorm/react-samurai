@@ -2,13 +2,13 @@ import React from 'react';
 import styles from './Dialogs.module.css';
 import Message from "../Message/Message";
 import Dialog from "../Dialog/Dialog";
-import {addMessageActionCreator, updateMessageTextActionCreator} from "../../redux/state";
+import {addMessageActionCreator, updateMessageTextActionCreator} from "../../redux/store";
 
 const Dialogs = ({ appState, dispatch }) => {
 
 
-    const userElements = appState.dialogsPage.users.map(user => <Dialog name={user.name} id={`${user.id}`} key={user.id}/>);
-    const messageElements = appState.dialogsPage.message.map(msg => <Message author={msg.author} text={msg.text} id={msg.id} key={msg.id} />)
+    const userElements = appState.dialogsReducer.users.map(user => <Dialog name={user.name} id={`${user.id}`} key={user.id}/>);
+    const messageElements = appState.dialogsReducer.message.map(msg => <Message author={msg.author} text={msg.text} id={msg.id} key={msg.id} />)
 
     const messageRef = React.createRef()
 
@@ -37,7 +37,7 @@ const Dialogs = ({ appState, dispatch }) => {
             }
             <div className={styles.newpost}>
                 <h3 className={styles.title}>New message</h3>
-                <textarea placeholder='your news' ref={messageRef} className={styles.form}  onChange={onInputChange}  value={appState.dialogsPage.newMessageText} />
+                <textarea placeholder='your news' ref={messageRef} className={styles.form}  onChange={onInputChange}  value={appState.dialogsReducer.newMessageText} />
                 <button type='submit' onClick={handleMsgSubmit}  className={styles.button}>Send</button>
             </div>
         </div>
