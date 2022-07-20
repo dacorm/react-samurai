@@ -7,7 +7,6 @@ import {addMessageActionCreator, updateMessageTextActionCreator} from "../../red
 const Dialogs = ({ appState, dispatch }) => {
 
 
-    console.log(appState)
     const userElements = appState.dialogsPage.users.map(user => <Dialog name={user.name} id={`${user.id}`} key={user.id}/>);
     const messageElements = appState.dialogsPage.message.map(msg => <Message author={msg.author} text={msg.text} id={msg.id} key={msg.id} />)
 
