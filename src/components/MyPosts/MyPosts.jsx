@@ -1,30 +1,32 @@
 import styles from "./MyPosts.module.css";
 import React from "react";
 import Post from "../Post/Post";
-import {addPostActionCreator, updatePostTextActionCreator} from "../../redux/store";
 
 
 
-const MyPosts = ({ posts, dispatch }) => {
-    const postElements = posts.profileReducer.posts.map(el => <Post message={el.message} id={el.id} key={el.id} />)
+const MyPosts = (props) => {
+    const state = props.profilePage
+
+    console.log(props)
+    const postElements = state.posts.map(el => <Post message={el.message} id={el.id} key={el.id} />)
     const postsRef = React.createRef();
 
 
     const handlePostSubmit = () => {
-        dispatch(addPostActionCreator());
-        dispatch(updatePostTextActionCreator(''))
+        props.sendPost();
+        props.updatePost('');
     }
 
     const onPostChange = () => {
         const text = postsRef.current.value;
-        dispatch(updatePostTextActionCreator(text))
+        props.sendPost(text);
     }
 
     return (
         <>
             <div className={styles.newpost}>
                 <h3 className={styles.title}>My post</h3>
-                <textarea placeholder='your news' onChange={onPostChange} ref={postsRef} className={styles.form}  value={posts.profileReducer.newPostText} />
+                <textarea placeholder='your news' onChange={onPostChange} ref={postsRef} className={styles.form}  value={state.newPostText} />
                 <button type='submit' onClick={handlePostSubmit} className={styles.button}>Send</button>
             </div>
             <div className={styles.posts}>

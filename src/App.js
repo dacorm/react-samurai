@@ -6,16 +6,16 @@ import Profile from "./components/Profile/Profile";
 import Dialogs from "./components/Dialogs/Dialogs";
 import {Routes, Route} from "react-router-dom";
 
-function App(props) {
+function App() {
 
   return (
     <div className="app-wrapper">
         <Header />
         <Navbar />
         <Routes>
-            <Route path="/" element={<Profile {...props} />} />
-            <Route path='dialogs/:id' element={<Dialogs {...props} />} />
-            <Route path='dialogs' element={<Dialogs {...props} />} />
+            <Route path="/" element={<Profile />} />
+            <Route path='dialogs/:id' element={<Dialogs />} />
+            <Route path='dialogs' element={<Dialogs />} />
         </Routes>
     </div>
   );

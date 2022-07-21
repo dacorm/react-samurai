@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './Profile.module.css'
 import MyPosts from "../MyPosts/MyPosts";
 
-const Profile = ({ appState, dispatch }) => {
+const Profile = () => {
 
     return (
         <div className={styles.content}>
@@ -19,7 +19,7 @@ const Profile = ({ appState, dispatch }) => {
                     <p className={styles.text}>Website: none</p>
                 </div>
             </div>
-            <MyPosts posts={appState} dispatch={dispatch} />
+            <MyPosts />
         </div>
     )
 }
