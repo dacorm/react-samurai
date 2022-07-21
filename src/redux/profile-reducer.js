@@ -5,14 +5,16 @@ const initialState = {
 }
 
 const profileReducer = (state = initialState, action) => {
+    const stateCopy = {...state};
     if (action.type === 'ADD-POST') {
-        const newMsg = { message: state.newPostText, id: `${state.posts.length} + 1`}
-        state.posts.unshift(newMsg);
+        const newMsg = { message: state.newPostText, id: `${state.posts.length} + 1`};
+        stateCopy.posts = [...state.posts]
+        stateCopy.posts.unshift(newMsg);
     } else if (action.type === 'UPDATE-POST-TEXT') {
-        state.newPostText = action.newText
+        stateCopy.newPostText = action.newText
     }
 
-    return state
+    return stateCopy
 }
 
 export const updatePostTextActionCreator = (text) => {

@@ -4,7 +4,7 @@ import {addPostActionCreator, updatePostTextActionCreator} from "../../redux/pro
 
 const mapStateToProps = (state) => {
     return {
-        profilePage: state.profilePage
+        profilePage: state.profileReducer
     }
 }
 

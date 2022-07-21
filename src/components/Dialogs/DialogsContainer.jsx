@@ -4,7 +4,7 @@ import {addMessageActionCreator, updateMessageTextActionCreator} from "../../red
 
 const mapStateToProps = (state) => {
     return {
-        dialogsPage: state.dialogsPage
+        dialogsPage: state.dialogsReducer
     }
 }
 

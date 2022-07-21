@@ -1,0 +1,46 @@
+.button {
+    width: 100px;
+    height: 30px;
+    background-color: #0a880a;
+    border: none;
+    margin-left: auto;
+    margin-top: 15px;
+}
+
+.round {
+    width: 70px;
+    height: 70px;
+    border-radius: 35px;
+    background-image: url("./40c4ee5b0ffac64383ccba2419a5f3de.jpg");
+    background-size: cover;
+    justify-self: flex-end;
+}
+
+.wrapper {
+    display: flex;
+    padding-bottom: 50px;
+}
+
+.userInfo {
+    justify-content: space-between;
+    display: flex;
+    width: 600px;
+    height: 115px;
+    border: 1px solid gray;
+    border-radius: 8px;
+    margin-left: 15px;
+}
+
+.textWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.buttonShow {
+    width: 150px;
+    height: 50px;
+    background-color: #0a880a;
+    border: none;
+    margin: 10px 300px;
+}

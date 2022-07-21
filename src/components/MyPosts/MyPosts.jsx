@@ -19,7 +19,7 @@ const MyPosts = (props) => {
 
     const onPostChange = () => {
         const text = postsRef.current.value;
-        props.sendPost(text);
+        props.updatePost(text);
     }
 
     return (

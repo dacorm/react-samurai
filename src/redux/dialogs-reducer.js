@@ -10,13 +10,15 @@ const initialState = {
 }
 
 const dialogsReducer = (state = initialState, action) => {
+    const stateCopy = {...state}
     if (action.type === 'ADD-MESSAGE') {
         const newMsg = {author: 'Dmitry', text: state.newMessageText, id: `${state.message.length} + 1`};
-        state.message.push(newMsg);
+        stateCopy.message = [...state.message];
+        stateCopy.message.push(newMsg);
     } else if (action.type === 'UPDATE-MESSAGE-TEXT') {
-        state.newMessageText = action.newText;}
+        stateCopy.newMessageText = action.newText;}
 
-    return state
+    return stateCopy
 }
 
 export const updateMessageTextActionCreator = (text) => {
