@@ -44,3 +44,23 @@
     border: none;
     margin: 10px 300px;
 }
+
+.pagBtn {
+    width: 30px;
+    height: 20px;
+    background-color: #0a880a;
+    border: none;
+    margin-right: 5px;
+    margin-bottom: 25px;
+    border-radius: 5px;
+}
+
+.pagBtnActive {
+    font-weight: bold;
+    background-color: #054805;
+}
+
+.pagBtn:hover {
+    opacity: .6;
+    cursor: pointer;
+}
