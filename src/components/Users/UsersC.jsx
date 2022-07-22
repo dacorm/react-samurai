@@ -2,13 +2,18 @@ import React from 'react';
 import s from "../Users/Users.module.css";
 import axios from 'axios';
 import userIcon from './png-clipart-businessperson-computer-icons-avatar-avatar-heroes-public-relations.png'
+import preloader from '../../assets/images/preloader.svg'
+import Preloader from "../Preloader/Preloader";
+
 
 class Users extends React.Component {
 
 
     componentDidMount() {
         if (this.props.users.length === 0) {
+            this.props.setFetching(true);
             axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
+                this.props.setFetching(false);
                 this.props.setUsers(response.data.items);
                 this.props.setTotalUsersCount(response.data.totalCount);
             })
@@ -16,8 +21,10 @@ class Users extends React.Component {
     }
 
     setPage = (pageNumber) => {
+        this.props.setFetching(true);
         this.props.setCurrentPage(pageNumber);
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then(response => {
+            this.props.setFetching(false);
             this.props.setUsers(response.data.items)
         });
     }
@@ -33,7 +40,9 @@ class Users extends React.Component {
 
         return (
             <div>
+
                 <h1>Users</h1>
+                {this.props.isFetching && <Preloader />}
                 <div>
                     {
                         pages.map(p => <button onClick={(e) => { this.setPage(p) }} className={this.props.currentPage === p ? `${s.pagBtn} + ${s.pagBtnActive}` : s.pagBtn} key={p}>{p}</button>)

@@ -7,6 +7,11 @@
     margin-top: 15px;
 }
 
+.button:hover {
+    cursor: pointer;
+    opacity: .6;
+}
+
 .round {
     width: 70px;
     height: 70px;
