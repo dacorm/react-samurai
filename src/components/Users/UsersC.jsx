@@ -4,6 +4,7 @@ import axios from 'axios';
 import userIcon from './png-clipart-businessperson-computer-icons-avatar-avatar-heroes-public-relations.png'
 import preloader from '../../assets/images/preloader.svg'
 import Preloader from "../Preloader/Preloader";
+import {NavLink} from "react-router-dom";
 
 
 class Users extends React.Component {
@@ -53,8 +54,10 @@ class Users extends React.Component {
                         (
                             <div className={s.wrapper}>
                                 <div className={s.avContainer}>
+                                    <NavLink to={`profile/${u.id}`}>
                                     <div className={s.round}
                                          style={{backgroundImage: `url(${u.photos.small != null ? u.photos.small : userIcon})`}}/>
+                                    </NavLink>
                                     {
                                         u.followed ? <button type='submit' onClick={() => this.props.unfollow(u.id)}
                                                              className={s.button}>Unfollow</button>
