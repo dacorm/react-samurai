@@ -13,7 +13,9 @@ class Users extends React.Component {
     componentDidMount() {
         if (this.props.users.length === 0) {
             this.props.setFetching(true);
-            axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
+            axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {
+                withCredentials: true
+            }).then(response => {
                 this.props.setFetching(false);
                 this.props.setUsers(response.data.items);
                 this.props.setTotalUsersCount(response.data.totalCount);
@@ -24,7 +26,9 @@ class Users extends React.Component {
     setPage = (pageNumber) => {
         this.props.setFetching(true);
         this.props.setCurrentPage(pageNumber);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then(response => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, {
+            withCredentials: true
+        }).then(response => {
             this.props.setFetching(false);
             this.props.setUsers(response.data.items)
         });
@@ -59,9 +63,31 @@ class Users extends React.Component {
                                          style={{backgroundImage: `url(${u.photos.small != null ? u.photos.small : userIcon})`}}/>
                                     </NavLink>
                                     {
-                                        u.followed ? <button type='submit' onClick={() => this.props.unfollow(u.id)}
+                                        u.followed ? <button type='submit' onClick={() => {
+                                                axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
+                                                    withCredentials: true,
+                                                    headers: {
+                                                        "API-KEY": "a2436f78-f724-455c-84e1-5fdca026437d"
+                                                    }
+                                                }).then(response => {
+                                                    if (response.data.resultCode === 0) {
+                                                        this.props.unfollow(u.id)
+                                                    }
+                                                })
+                                        }}
                                                              className={s.button}>Unfollow</button>
-                                            : <button type='submit' onClick={() => this.props.follow(u.id)}
+                                            : <button type='submit' onClick={() => {
+                                                axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
+                                                    withCredentials: true,
+                                                    headers: {
+                                                        "API-KEY": "a2436f78-f724-455c-84e1-5fdca026437d"
+                                                    }
+                                                }).then(response => {
+                                                    if (response.data.resultCode === 0) {
+                                                        this.props.follow(u.id)
+                                                    }
+                                                })
+                                            }}
                                                       className={s.button}>Follow</button>
                                     }
                                 </div>

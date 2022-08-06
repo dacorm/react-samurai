@@ -24,7 +24,6 @@ const Profile = ({ profile }) => {
                     <p className={styles.text}>Instagram: <a href={profile.contacts.instagram}>{profile.contacts.instagram}</a></p>
                     <p className={styles.text}>Twitter: <a href={profile.contacts.twitter}>{profile.contacts.twitter}</a></p>
                     <p className={styles.text}>Vk: <a href={profile.contacts.vk}>{profile.contacts.vk}</a></p>
-                    <p className={styles.text}>{profile.aboutMe}</p>
                     <p className={styles.text}>{`Статус поиска работы: ${profile.lookingForAJob ? 'Ищу' : 'Нет'}`}</p>
                     <p className={styles.text}>{`Рабочий статус: ${profile.lookingForAJobDescription}`}</p>
                     <p className={styles.text}>Website: none</p>
