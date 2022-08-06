@@ -7,7 +7,8 @@ import {
     setFetching,
     setUsers,
     setTotalUsersCount,
-    unfollow
+    unfollow,
+    toggleFollowingProgress
 } from "../../redux/users-reducer";
 
 
@@ -18,7 +19,8 @@ let mapStateToProps = (state) => {
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching
+        isFetching: state.usersPage.isFetching,
+        followingInProgress: state.usersPage.followingInProgress
     }
 }
 
@@ -45,4 +47,4 @@ let mapStateToProps = (state) => {
 //     }
 // }
 
-export default connect(mapStateToProps, {follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, setFetching})(UsersC);
+export default connect(mapStateToProps, {follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, setFetching, toggleFollowingProgress})(UsersC);

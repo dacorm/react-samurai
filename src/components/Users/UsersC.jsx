@@ -5,6 +5,7 @@ import userIcon from './png-clipart-businessperson-computer-icons-avatar-avatar-
 import preloader from '../../assets/images/preloader.svg'
 import Preloader from "../Preloader/Preloader";
 import {NavLink} from "react-router-dom";
+import {toggleFollowingProgress} from "../../redux/users-reducer";
 
 
 class Users extends React.Component {
@@ -63,7 +64,8 @@ class Users extends React.Component {
                                          style={{backgroundImage: `url(${u.photos.small != null ? u.photos.small : userIcon})`}}/>
                                     </NavLink>
                                     {
-                                        u.followed ? <button type='submit' onClick={() => {
+                                        u.followed ? <button type='submit' disabled={this.props.followingInProgress.some(id => id === u.id)} onClick={() => {
+                                                this.props.toggleFollowingProgress(true, u.id);
                                                 axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
                                                     withCredentials: true,
                                                     headers: {
@@ -72,11 +74,13 @@ class Users extends React.Component {
                                                 }).then(response => {
                                                     if (response.data.resultCode === 0) {
                                                         this.props.unfollow(u.id)
+                                                        this.props.toggleFollowingProgress(false, u.id);
                                                     }
                                                 })
                                         }}
                                                              className={s.button}>Unfollow</button>
-                                            : <button type='submit' onClick={() => {
+                                            : <button type='submit' disabled={this.props.followingInProgress.some(id => id === u.id)} onClick={() => {
+                                                this.props.toggleFollowingProgress(true, u.id);
                                                 axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
                                                     withCredentials: true,
                                                     headers: {
@@ -85,6 +89,7 @@ class Users extends React.Component {
                                                 }).then(response => {
                                                     if (response.data.resultCode === 0) {
                                                         this.props.follow(u.id)
+                                                        this.props.toggleFollowingProgress(false, u.id);
                                                     }
                                                 })
                                             }}
