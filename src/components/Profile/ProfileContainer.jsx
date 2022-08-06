@@ -10,7 +10,7 @@ const ProfileContainer = (props) => {
     const { id } = useParams();
 
     useEffect(() => {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${id}`).then(response => setUserProfile(response.data))
+        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${id ?? 2}`).then(response => props.setUserProfile(response.data))
     }, [])
 
     return (
