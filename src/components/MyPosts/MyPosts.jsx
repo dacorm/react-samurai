@@ -7,7 +7,6 @@ import Post from "../Post/Post";
 const MyPosts = (props) => {
     const state = props.profilePage
 
-    console.log(props)
     const postElements = state.posts.map(el => <Post message={el.message} id={el.id} key={el.id} />)
     const postsRef = React.createRef();
 

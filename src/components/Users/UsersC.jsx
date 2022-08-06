@@ -54,7 +54,7 @@ class Users extends React.Component {
                         (
                             <div className={s.wrapper}>
                                 <div className={s.avContainer}>
-                                    <NavLink to={`profile/${u.id}`}>
+                                    <NavLink to={`/profile/${u.id}`}>
                                     <div className={s.round}
                                          style={{backgroundImage: `url(${u.photos.small != null ? u.photos.small : userIcon})`}}/>
                                     </NavLink>

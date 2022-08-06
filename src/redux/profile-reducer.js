@@ -1,7 +1,8 @@
 
 const initialState = {
     posts: [{message: 'Hey its my first post', id: 1}, {message: 'Im writing social network', id: 2},],
-    newPostText: ""
+    newPostText: "",
+    profile: null
 }
 
 const profileReducer = (state = initialState, action) => {
@@ -12,6 +13,8 @@ const profileReducer = (state = initialState, action) => {
         stateCopy.posts.unshift(newMsg);
     } else if (action.type === 'UPDATE-POST-TEXT') {
         stateCopy.newPostText = action.newText
+    } else if (action.type === 'SET_USER_PROFILE') {
+        stateCopy.profile = action.profile
     }
 
     return stateCopy
@@ -23,6 +26,10 @@ export const updatePostTextActionCreator = (text) => {
 
 export const addPostActionCreator = () => {
     return {type: 'ADD-POST'}
+}
+
+export const setUserProfile = (profile) => {
+    return {type: 'SET_USER_PROFILE', profile}
 }
 
 export default profileReducer
