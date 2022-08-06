@@ -1,10 +1,27 @@
 .header {
     background-color: #0a880a;
     display: flex;
+    justify-content: space-between;
     grid-area: header;
 }
 
 .image {
     height: 40px;
     margin: 10px;
+}
+
+.login {
+    margin-right: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 15px;
+    color: wheat;
+}
+
+.username {
+    margin-right: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 15px;
+    color: wheat;
 }

@@ -7,8 +7,6 @@ const Profile = ({ profile }) => {
 
     if (!profile) {
         return <Preloader />
-
-
     }
 
     return (
