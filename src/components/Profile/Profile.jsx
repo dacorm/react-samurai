@@ -3,8 +3,9 @@ import styles from './Profile.module.css'
 import MyPostsContainer from "../MyPosts/MyPostsContainer";
 import Preloader from "../Preloader/Preloader";
 import {useNavigate} from "react-router-dom";
+import ProfileStatus from "./ProfileStatus";
 
-const Profile = ({ profile, isAuth }) => {
+const Profile = ({ profile, isAuth, status, updateStatus, id }) => {
 
     if (!profile) {
         return <Preloader />
@@ -13,13 +14,11 @@ const Profile = ({ profile, isAuth }) => {
 
     return (
         <div className={styles.content}>
-            <div className={styles.cover}>
-                <img src='https://cdn.fishki.net/upload/post/2018/06/04/2615820/11.jpg' alt='Profile avatar' className='contentImage'/>
-            </div>
             <div className={styles.profileInfo}>
                 <div className={styles.avatar} style={{backgroundImage: `url(${profile.photos.small})`}}/>
                 <div className={styles.description}>
                     <p className={styles.text}>{profile.fullName}</p>
+                    <ProfileStatus status={status} updateStatus={updateStatus} id={id} />
                     <p className={styles.text}>{profile.aboutMe}</p>
                     <p className={styles.text}>Facebook: <a href={profile.contacts.facebook}>{profile.contacts.facebook}</a></p>
                     <p className={styles.text}>Github: <a href={profile.contacts.github}>{profile.contacts.github}</a></p>
