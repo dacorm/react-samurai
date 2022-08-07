@@ -1,3 +1,5 @@
+import axios from "axios";
+
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
@@ -70,5 +72,46 @@ export const setUsers = (users) => ({type: SET_USERS, users })
 export const setTotalUsersCount = (totalUsersCount) => ({type: SET_TOTAL_USERS_COUNT, totalUsersCount})
 export const setFetching = (isFetching) => ({type: SET_FETCHING, isFetching})
 export const toggleFollowingProgress = (followingInProgress, userId) => ({type: TOGGLE_IS_FOLLOWING_PROGRESS, followingInProgress, userId})
+
+export const getUsersThunk = (currentPage, pageSize) => (dispatch) => {
+    dispatch(setFetching(true));
+    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${pageSize}`, {
+        withCredentials: true
+    }).then(response => {
+        dispatch(setFetching(false));
+        dispatch(setUsers(response.data.items));
+        dispatch(setTotalUsersCount(response.data.totalCount));
+    })
+}
+
+export const unfollowThunk = (userId) => (dispatch) => {
+    dispatch(toggleFollowingProgress(true, userId));
+    axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`, {
+        withCredentials: true,
+        headers: {
+            "API-KEY": "a2436f78-f724-455c-84e1-5fdca026437d"
+        }
+    }).then(response => {
+        if (response.data.resultCode === 0) {
+            dispatch(unfollow(userId));
+            dispatch(toggleFollowingProgress(false, userId));
+        }
+    })
+}
+
+export const followThunk = (userId) => (dispatch) => {
+    dispatch(toggleFollowingProgress(true, userId));
+    axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`, {}, {
+        withCredentials: true,
+        headers: {
+            "API-KEY": "a2436f78-f724-455c-84e1-5fdca026437d"
+        }
+    }).then(response => {
+        if (response.data.resultCode === 0) {
+            dispatch(follow(userId))
+            dispatch(toggleFollowingProgress(false, userId));
+        }
+    })
+}
 
 export default usersReducer;

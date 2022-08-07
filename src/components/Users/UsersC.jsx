@@ -13,26 +13,13 @@ class Users extends React.Component {
 
     componentDidMount() {
         if (this.props.users.length === 0) {
-            this.props.setFetching(true);
-            axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {
-                withCredentials: true
-            }).then(response => {
-                this.props.setFetching(false);
-                this.props.setUsers(response.data.items);
-                this.props.setTotalUsersCount(response.data.totalCount);
-            })
+            this.props.getUsersThunk(this.props.currentPage, this.props.pageSize)
         }
     }
 
     setPage = (pageNumber) => {
-        this.props.setFetching(true);
+        this.props.getUsersThunk(pageNumber, this.props.pageSize)
         this.props.setCurrentPage(pageNumber);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, {
-            withCredentials: true
-        }).then(response => {
-            this.props.setFetching(false);
-            this.props.setUsers(response.data.items)
-        });
     }
 
     render() {
@@ -65,33 +52,11 @@ class Users extends React.Component {
                                     </NavLink>
                                     {
                                         u.followed ? <button type='submit' disabled={this.props.followingInProgress.some(id => id === u.id)} onClick={() => {
-                                                this.props.toggleFollowingProgress(true, u.id);
-                                                axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
-                                                    withCredentials: true,
-                                                    headers: {
-                                                        "API-KEY": "a2436f78-f724-455c-84e1-5fdca026437d"
-                                                    }
-                                                }).then(response => {
-                                                    if (response.data.resultCode === 0) {
-                                                        this.props.unfollow(u.id)
-                                                        this.props.toggleFollowingProgress(false, u.id);
-                                                    }
-                                                })
+                                                this.props.unfollowThunk(u.id);
                                         }}
                                                              className={s.button}>Unfollow</button>
                                             : <button type='submit' disabled={this.props.followingInProgress.some(id => id === u.id)} onClick={() => {
-                                                this.props.toggleFollowingProgress(true, u.id);
-                                                axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
-                                                    withCredentials: true,
-                                                    headers: {
-                                                        "API-KEY": "a2436f78-f724-455c-84e1-5fdca026437d"
-                                                    }
-                                                }).then(response => {
-                                                    if (response.data.resultCode === 0) {
-                                                        this.props.follow(u.id)
-                                                        this.props.toggleFollowingProgress(false, u.id);
-                                                    }
-                                                })
+                                                this.props.followThunk(u.id);
                                             }}
                                                       className={s.button}>Follow</button>
                                     }

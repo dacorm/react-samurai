@@ -3,11 +3,11 @@ import styles from './Header.module.css';
 import {Link, NavLink} from "react-router-dom";
 import axios from "axios";
 
-const Header = ({ isAuth, login, setUserProfile, id }) => {
+const Header = ({ isAuth, login, setUserThunk, id }) => {
 
     useEffect(() => {
         if (isAuth && id) {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${id}`).then(response => setUserProfile(response.data))
+            setUserThunk(id);
         }
     }, [isAuth, id])
 

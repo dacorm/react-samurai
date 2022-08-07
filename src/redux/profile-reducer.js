@@ -1,3 +1,4 @@
+import axios from "axios";
 
 const initialState = {
     posts: [{message: 'Hey its my first post', id: 1}, {message: 'Im writing social network', id: 2},],
@@ -30,6 +31,11 @@ export const addPostActionCreator = () => {
 
 export const setUserProfile = (profile) => {
     return {type: 'SET_USER_PROFILE', profile}
+}
+
+export const setUserProfileThunk = (userId) => (dispatch) => {
+    axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId ?? 2}`)
+        .then(response => dispatch(setUserProfile(response.data)))
 }
 
 export default profileReducer
