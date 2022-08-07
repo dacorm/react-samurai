@@ -14,14 +14,15 @@ const ProfileContainer = (props) => {
     }, [id])
 
     return (
-    <Profile setUserProfile={props.setUserProfile} profile={props.profile} />
+    <Profile setUserProfile={props.setUserProfile} profile={props.profile} isAuth={props.isAuth} />
     );
 }
 ;
 
 
 let mapStateToProps = (state) => ({
-    profile: state.profileReducer.profile
+    profile: state.profileReducer.profile,
+    isAuth: state.auth.isAuth,
 })
 
 export default connect(mapStateToProps, {setUserProfile, setUserProfileThunk})(ProfileContainer);

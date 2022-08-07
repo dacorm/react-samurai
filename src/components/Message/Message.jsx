@@ -1,7 +1,16 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styles from './Message.module.css';
+import {connect} from "react-redux";
+import {useNavigate} from "react-router-dom";
 
-const Message = ({ author, text, id }) => {
+const Message = ({ author, text, id, isAuth }) => {
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (!isAuth) navigate('/login')
+    }, [isAuth])
+
+
     return (
         <div className={styles.message}>
             <div className={styles.avatar}>
@@ -13,4 +22,8 @@ const Message = ({ author, text, id }) => {
     )
 }
 
-export default Message
+let mapStateToProps = (state) => ({
+    isAuth: state.auth.isAuth,
+})
+
+export default connect(mapStateToProps, {})(Message)

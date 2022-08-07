@@ -1,13 +1,20 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styles from './Profile.module.css'
 import MyPostsContainer from "../MyPosts/MyPostsContainer";
 import Preloader from "../Preloader/Preloader";
+import {useNavigate} from "react-router-dom";
 
-const Profile = ({ profile }) => {
+const Profile = ({ profile, isAuth }) => {
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (!isAuth) navigate('/login')
+    }, [isAuth])
 
     if (!profile) {
         return <Preloader />
     }
+
 
     return (
         <div className={styles.content}>
