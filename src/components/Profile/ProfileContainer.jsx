@@ -4,6 +4,7 @@ import axios from "axios";
 import {connect} from "react-redux";
 import {setUserProfile, setUserProfileThunk} from "../../redux/profile-reducer";
 import {useParams} from "react-router-dom";
+import {authRedirect} from "../../hoc/authRedirect";
 
 
 const ProfileContainer = (props) => {
@@ -25,4 +26,6 @@ let mapStateToProps = (state) => ({
     isAuth: state.auth.isAuth,
 })
 
-export default connect(mapStateToProps, {setUserProfile, setUserProfileThunk})(ProfileContainer);
+const Redirect = authRedirect(ProfileContainer)
+
+export default connect(mapStateToProps, {setUserProfile, setUserProfileThunk})(Redirect);

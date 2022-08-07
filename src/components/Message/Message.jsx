@@ -2,13 +2,9 @@ import React, {useEffect} from 'react';
 import styles from './Message.module.css';
 import {connect} from "react-redux";
 import {useNavigate} from "react-router-dom";
+import {authRedirect} from "../../hoc/authRedirect";
 
 const Message = ({ author, text, id, isAuth }) => {
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        if (!isAuth) navigate('/login')
-    }, [isAuth])
 
 
     return (
@@ -26,4 +22,6 @@ let mapStateToProps = (state) => ({
     isAuth: state.auth.isAuth,
 })
 
-export default connect(mapStateToProps, {})(Message)
+const Redirect = authRedirect(Message)
+
+export default connect(mapStateToProps, {})(Redirect)

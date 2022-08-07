@@ -5,11 +5,6 @@ import Preloader from "../Preloader/Preloader";
 import {useNavigate} from "react-router-dom";
 
 const Profile = ({ profile, isAuth }) => {
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        if (!isAuth) navigate('/login')
-    }, [isAuth])
 
     if (!profile) {
         return <Preloader />
