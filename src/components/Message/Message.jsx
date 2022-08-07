@@ -3,6 +3,7 @@ import styles from './Message.module.css';
 import {connect} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {authRedirect} from "../../hoc/authRedirect";
+import {compose} from "redux";
 
 const Message = ({ author, text, id, isAuth }) => {
 
@@ -22,6 +23,9 @@ let mapStateToProps = (state) => ({
     isAuth: state.auth.isAuth,
 })
 
-const Redirect = authRedirect(Message)
 
-export default connect(mapStateToProps, {})(Redirect)
+
+export default compose(
+    connect(mapStateToProps, {}),
+    authRedirect
+)(Message);

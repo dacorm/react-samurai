@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import {setUserProfile, setUserProfileThunk} from "../../redux/profile-reducer";
 import {useParams} from "react-router-dom";
 import {authRedirect} from "../../hoc/authRedirect";
+import {compose} from "redux";
 
 
 const ProfileContainer = (props) => {
@@ -26,6 +27,8 @@ let mapStateToProps = (state) => ({
     isAuth: state.auth.isAuth,
 })
 
-const Redirect = authRedirect(ProfileContainer)
 
-export default connect(mapStateToProps, {setUserProfile, setUserProfileThunk})(Redirect);
+export default compose(
+    connect(mapStateToProps, {setUserProfile, setUserProfileThunk}),
+    authRedirect,
+)(ProfileContainer);
