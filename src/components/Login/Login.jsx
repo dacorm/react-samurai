@@ -33,7 +33,7 @@ const Login = ({ id, isAuth, loginThunk, authThunk }) => {
     const navigate = useNavigate();
 
     const onSubmit = (formData) => {
-        loginThunk(formData.email, formData.password, formData.rememberMe);
+       loginThunk(formData.email, formData.password, formData.rememberMe)
     }
 
     useEffect(() => {

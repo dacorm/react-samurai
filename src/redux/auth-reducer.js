@@ -61,8 +61,8 @@ export const loginThunk = (email, password, rememberMe = false) => (dispatch) =>
         withCredentials: true
     })
         .then(response => {
-            if (response.resultCode === 0) {
-                console.log(response)
+            console.log(response)
+            if (response.data.resultCode === 0) {
             dispatch(authThunk())
             }
         })
@@ -73,7 +73,8 @@ export const logoutThunk = () => (dispatch) => {
         withCredentials: true
     })
         .then(response => {
-            if (response.resultCode === 0) {
+            console.log(response)
+            if (response.data.resultCode === 0) {
                 dispatch(resetUserData(null, null, null))
             }
         })
