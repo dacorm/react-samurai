@@ -4,6 +4,7 @@ import MyPostsContainer from "../MyPosts/MyPostsContainer";
 import Preloader from "../Preloader/Preloader";
 import {useNavigate} from "react-router-dom";
 import ProfileStatus from "./ProfileStatus";
+import userPhoto from './png-clipart-businessperson-computer-icons-avatar-avatar-heroes-public-relations.png';
 
 const Profile = ({ profile, isAuth, status, updateStatus, id }) => {
 
@@ -15,7 +16,7 @@ const Profile = ({ profile, isAuth, status, updateStatus, id }) => {
     return (
         <div className={styles.content}>
             <div className={styles.profileInfo}>
-                <div className={styles.avatar} style={{backgroundImage: `url(${profile.photos.small})`}}/>
+                <div className={styles.avatar} style={{backgroundImage: `url(${profile.photos.small ?? userPhoto})`}}/>
                 <div className={styles.description}>
                     <p className={styles.text}>{profile.fullName}</p>
                     <ProfileStatus status={status} updateStatus={updateStatus} id={id} />

@@ -24,6 +24,7 @@ const Header = ({ isAuth, login, setUserThunk, id, logoutThunk }) => {
                             <p className={styles.username}>{login}</p>
                             <button onClick={() => {
                                 logoutThunk()
+                                navigate('/login')
                             }}>Logout</button>
                         </div>
                     )

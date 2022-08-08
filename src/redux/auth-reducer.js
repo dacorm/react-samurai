@@ -12,8 +12,9 @@ const initialState = {
     // isFetching: false,
 };
 
+
 const authReducer = (state = initialState, action) => {
-    switch(action.type) {
+    switch (action.type) {
         case SET_USER_DATA:
             return {
                 ...state,
@@ -36,16 +37,16 @@ const authReducer = (state = initialState, action) => {
 }
 
 
-export const setUserData = (userId, email, login) => ({type: 'SET_USER_DATA', data: {userId, email, login} })
-export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile })
-export const resetUserData = (userId, email, login) => ({type: RESET_USER_DATA, data: {userId, email, login} })
+export const setUserData = (userId, email, login) => ({type: 'SET_USER_DATA', data: {userId, email, login}})
+export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile})
+export const resetUserData = (userId, email, login) => ({type: RESET_USER_DATA, data: {userId, email, login}})
 
 export const authThunk = () => (dispatch) => {
     axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
         withCredentials: true
     }).then(response => {
         if (response.data.resultCode === 0) {
-            const { id, login, email } = response.data.data;
+            const {id, login, email} = response.data.data;
             dispatch(setUserData(id, email, login));
         }
     })
@@ -57,13 +58,13 @@ export const setUserThunk = (userId) => (dispatch) => {
 }
 
 export const loginThunk = (email, password, rememberMe = false) => (dispatch) => {
-    axios.post(`https://social-network.samuraijs.com/api/1.0/auth/login`, { email, password, rememberMe }, {
+    axios.post(`https://social-network.samuraijs.com/api/1.0/auth/login`, {email, password, rememberMe}, {
         withCredentials: true
     })
         .then(response => {
             console.log(response)
             if (response.data.resultCode === 0) {
-            dispatch(authThunk())
+                dispatch(authThunk())
             }
         })
 }

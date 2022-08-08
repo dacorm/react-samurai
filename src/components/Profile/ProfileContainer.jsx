@@ -14,17 +14,18 @@ import {compose} from "redux";
 
 
 const ProfileContainer = (props) => {
-    const { id } = useParams();
+        const {id} = useParams();
 
-    useEffect(() => {
-        props.setUserProfileThunk(id);
-        props.setUserStatusThunk(id);
-    }, [id])
+        useEffect(() => {
+            props.setUserProfileThunk(id);
+            props.setUserStatusThunk(id);
+        }, [id])
 
-    return (
-    <Profile setUserProfile={props.setUserProfile} profile={props.profile} isAuth={props.isAuth} status={props.status} updateStatus={props.updateUserStatusThunk} id={id} />
-    );
-}
+        return (
+            <Profile setUserProfile={props.setUserProfile} profile={props.profile} isAuth={props.isAuth}
+                     status={props.status} updateStatus={props.updateUserStatusThunk} id={id}/>
+        );
+    }
 ;
 
 
