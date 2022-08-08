@@ -1,32 +1,45 @@
 import styles from "./MyPosts.module.css";
 import React from "react";
 import Post from "../Post/Post";
+import {Field, Form} from "react-final-form";
 
 
+
+const MyPostsForm = ({ onPostChange, handlePostSubmit }) => {
+
+    const onSubmit = (formData) => {
+        handlePostSubmit(formData)
+    }
+
+    return (
+        <Form
+            onSubmit={onSubmit}
+            render={({ handleSubmit }) => (
+                <form onSubmit={handleSubmit}>
+                    <Field name='post' placeholder='your news' className={styles.form} component='textarea' />
+                    <button type='submit' className={styles.button}>Send</button>
+                </form>
+            )}
+        />
+    );
+};
 
 const MyPosts = (props) => {
     const state = props.profilePage
-
+    console.log(props.sendPost)
     const postElements = state.posts.map(el => <Post message={el.message} id={el.id} key={el.id} />)
-    const postsRef = React.createRef();
 
 
-    const handlePostSubmit = () => {
-        props.sendPost();
-        props.updatePost('');
-    }
-
-    const onPostChange = () => {
-        const text = postsRef.current.value;
-        props.updatePost(text);
+    const handlePostSubmit = (values) => {
+        props.sendPost(values.post);
+        values.post = '';
     }
 
     return (
         <>
             <div className={styles.newpost}>
                 <h3 className={styles.title}>My post</h3>
-                <textarea placeholder='your news' onChange={onPostChange} ref={postsRef} className={styles.form}  value={state.newPostText} />
-                <button type='submit' onClick={handlePostSubmit} className={styles.button}>Send</button>
+                <MyPostsForm handlePostSubmit={handlePostSubmit} />
             </div>
             <div className={styles.posts}>
                 {

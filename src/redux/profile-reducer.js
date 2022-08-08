@@ -10,11 +10,10 @@ const initialState = {
 const profileReducer = (state = initialState, action) => {
     const stateCopy = {...state};
     if (action.type === 'ADD-POST') {
-        const newMsg = { message: state.newPostText, id: `${state.posts.length} + 1`};
+        const newMsg = { message: action.newPostText, id: `${state.posts.length} + 1`};
         stateCopy.posts = [...state.posts]
+        stateCopy.newPostText = ''
         stateCopy.posts.unshift(newMsg);
-    } else if (action.type === 'UPDATE-POST-TEXT') {
-        stateCopy.newPostText = action.newText
     } else if (action.type === 'SET_USER_PROFILE') {
         stateCopy.profile = action.profile
     } else if (action.type === 'SET_USER_STATUS') {
@@ -24,12 +23,9 @@ const profileReducer = (state = initialState, action) => {
     return stateCopy
 }
 
-export const updatePostTextActionCreator = (text) => {
-    return {type: 'UPDATE-POST-TEXT', newText: text}
-}
 
-export const addPostActionCreator = () => {
-    return {type: 'ADD-POST'}
+export const addPostActionCreator = (newPostText) => {
+    return {type: 'ADD-POST', newPostText}
 }
 
 export const setUserProfile = (profile) => {

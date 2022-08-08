@@ -2,24 +2,37 @@ import React from 'react';
 import styles from './Dialogs.module.css';
 import Message from "../Message/Message";
 import Dialog from "../Dialog/Dialog";
+import {Field, Form} from "react-final-form";
 
 const Dialogs = (props) => {
 
     const state = props.dialogsPage
-    console.log(props)
     const userElements = state.users.map(user => <Dialog name={user.name} id={`${user.id}`} key={user.id}/>);
     const messageElements = state.message.map(msg => <Message author={msg.author} text={msg.text} id={msg.id} key={msg.id} />)
 
-    const messageRef = React.createRef()
+    const DialogsForm = ({ handleMessageSubmit }) => {
 
-    const handleMsgSubmit = () => {
-        props.sendMessage()
-        props.updateMessage('');
-    }
+        const onSubmit = (formData) => {
+            handleMessageSubmit(formData)
+        }
 
-    const onInputChange = () => {
-        const text = messageRef.current.value;
-        props.updateMessage(text);
+        return (
+            <Form
+                onSubmit={onSubmit}
+                render={({ handleSubmit }) => (
+                    <form onSubmit={handleSubmit}>
+                        <Field name='message' placeholder='your news' className={styles.form} component='textarea' />
+                        <button type='submit' className={styles.button}>Send</button>
+                    </form>
+                )}
+            />
+        );
+    };
+
+
+    const handleMessageSubmit = (values) => {
+        props.updateMessage(values.message);
+        props.sendMessage();
     }
 
     return (
@@ -37,8 +50,7 @@ const Dialogs = (props) => {
             }
             <div className={styles.newpost}>
                 <h3 className={styles.title}>New message</h3>
-                <textarea placeholder='your news' ref={messageRef} className={styles.form}  onChange={onInputChange}  value={state.newMessageText} />
-                <button type='submit' onClick={handleMsgSubmit}  className={styles.button}>Send</button>
+                <DialogsForm handleMessageSubmit={handleMessageSubmit}/>
             </div>
         </div>
         </div>
