@@ -2,10 +2,12 @@ import styles from "./MyPosts.module.css";
 import React from "react";
 import Post from "../Post/Post";
 import {Field, Form} from "react-final-form";
+import {myPostsValidator, required} from "../../utils/validator";
+import Element from "../../hoc/formValidation";
 
+const TextArea = Element('textarea')
 
-
-const MyPostsForm = ({ onPostChange, handlePostSubmit }) => {
+const MyPostsForm = ({ handlePostSubmit }) => {
 
     const onSubmit = (formData) => {
         handlePostSubmit(formData)
@@ -16,7 +18,8 @@ const MyPostsForm = ({ onPostChange, handlePostSubmit }) => {
             onSubmit={onSubmit}
             render={({ handleSubmit }) => (
                 <form onSubmit={handleSubmit}>
-                    <Field name='post' placeholder='your news' className={styles.form} component='textarea' />
+                    <Field name='post' placeholder='your news' className={styles.form} component={TextArea} validate={myPostsValidator}
+                    />
                     <button type='submit' className={styles.button}>Send</button>
                 </form>
             )}
@@ -26,7 +29,7 @@ const MyPostsForm = ({ onPostChange, handlePostSubmit }) => {
 
 const MyPosts = (props) => {
     const state = props.profilePage
-    console.log(props.sendPost)
+
     const postElements = state.posts.map(el => <Post message={el.message} id={el.id} key={el.id} />)
 
 
