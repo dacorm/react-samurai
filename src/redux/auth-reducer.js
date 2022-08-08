@@ -62,6 +62,7 @@ export const loginThunk = (email, password, rememberMe = false) => (dispatch) =>
     })
         .then(response => {
             if (response.resultCode === 0) {
+                console.log(response)
             dispatch(authThunk())
             }
         })
