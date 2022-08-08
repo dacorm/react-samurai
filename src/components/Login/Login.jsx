@@ -1,16 +1,15 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styles from './Login.module.css';
 import {Field, Form} from 'react-final-form';
 import {required} from "../../utils/validator";
 import Element from "../../hoc/formValidation";
+import {connect} from "react-redux";
+import {loginThunk} from "../../redux/auth-reducer";
+import {useNavigate} from "react-router-dom";
 
 const Input = Element('input')
 
-const LoginForm = () => {
-
-    const onSubmit = (formData) => {
-        console.log(formData)
-    }
+const LoginForm = ({ onSubmit }) => {
 
     return (
             <Form
@@ -18,7 +17,7 @@ const LoginForm = () => {
                 render={({ handleSubmit }) => (
                     <form className={styles.form} onSubmit={handleSubmit}>
                         <Field name='login' placeholder={'Login'} component={Input} validate={required} />
-                        <Field name='password' placeholder={'password'} component={Input} validate={required} />
+                        <Field name='password' placeholder={'password'} component={Input} validate={required} type='password' />
                         <div className={styles.container}>
                             <Field name='rememberMe' type='checkbox' component='input' />
                             <p>remember me</p>
@@ -30,13 +29,29 @@ const LoginForm = () => {
         );
 };
 
-const Login = () => {
+const Login = ({ id, isAuth }) => {
+    const navigate = useNavigate();
+
+    const onSubmit = (formData) => {
+        loginThunk(formData.login, formData.password, formData.rememberMe)
+    }
+
+    useEffect(() => {
+        if (isAuth) navigate(`/profile/${id}`)
+    }, [isAuth, id])
+
     return (
         <div>
             <h1>Login</h1>
-            <LoginForm />
+            <LoginForm onSubmit={onSubmit}/>
         </div>
     );
 };
 
-export default Login;
+const mapStateToProps = (state) => ({
+    isAuth: state.auth.isAuth,
+    login: state.auth.login,
+    id: state.auth.userId
+})
+
+export default connect(mapStateToProps, {loginThunk})(Login);

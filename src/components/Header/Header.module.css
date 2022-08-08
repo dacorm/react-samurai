@@ -19,9 +19,14 @@
 }
 
 .username {
-    margin-right: 10px;
+    margin: 0 10px 0 0;
     text-decoration: none;
     font-weight: bold;
     font-size: 15px;
     color: wheat;
+}
+
+.container {
+    display: flex;
+    align-items: center;
 }

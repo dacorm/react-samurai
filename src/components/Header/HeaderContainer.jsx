@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import Header from "./Header";
 import axios from "axios";
 import {connect} from "react-redux";
-import {authThunk, setUserData, setUserProfile, setUserThunk} from "../../redux/auth-reducer";
+import {authThunk, loginThunk, logoutThunk, setUserData, setUserProfile, setUserThunk} from "../../redux/auth-reducer";
 
 const HeaderContainer = (props) => {
 
@@ -21,4 +21,5 @@ const mapStateToProps = (state) => ({
     id: state.auth.userId
 })
 
-export default connect(mapStateToProps, {setUserData, setUserProfile, authThunk, setUserThunk})(HeaderContainer);
+export default connect(mapStateToProps, {setUserData, setUserProfile,
+    authThunk, setUserThunk, loginThunk, logoutThunk})(HeaderContainer);
