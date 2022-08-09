@@ -1,8 +1,7 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import styles from './Profile.module.css'
 import MyPostsContainer from "../MyPosts/MyPostsContainer";
 import Preloader from "../Preloader/Preloader";
-import {useNavigate} from "react-router-dom";
 import ProfileStatus from "./ProfileStatus";
 import userPhoto from './png-clipart-businessperson-computer-icons-avatar-avatar-heroes-public-relations.png';
 
