@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/react-samurai/static/css/main.4b9aad9e.css",
-    "main.js": "/react-samurai/static/js/main.a2a5a976.js",
+    "main.js": "/react-samurai/static/js/main.342fc882.js",
     "static/media/sPealEpjFy0.jpg": "/react-samurai/static/media/sPealEpjFy0.28542be7e2ea5906b4f0.jpg",
     "static/media/png-clipart-businessperson-computer-icons-avatar-avatar-heroes-public-relations.png": "/react-samurai/static/media/png-clipart-businessperson-computer-icons-avatar-avatar-heroes-public-relations.b0631ea7bd37c9ccba4f.png",
     "static/media/preloader.svg": "/react-samurai/static/media/preloader.ea356991b1c2fb4775312a4c61f7a20d.svg",
     "index.html": "/react-samurai/index.html",
     "main.4b9aad9e.css.map": "/react-samurai/static/css/main.4b9aad9e.css.map",
-    "main.a2a5a976.js.map": "/react-samurai/static/js/main.a2a5a976.js.map"
+    "main.342fc882.js.map": "/react-samurai/static/js/main.342fc882.js.map"
   },
   "entrypoints": [
     "static/css/main.4b9aad9e.css",
-    "static/js/main.a2a5a976.js"
+    "static/js/main.342fc882.js"
   ]
 }
