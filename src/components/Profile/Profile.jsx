@@ -1,11 +1,30 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './Profile.module.css'
 import MyPostsContainer from "../MyPosts/MyPostsContainer";
 import Preloader from "../Preloader/Preloader";
 import ProfileStatus from "./ProfileStatus";
 import userPhoto from './png-clipart-businessperson-computer-icons-avatar-avatar-heroes-public-relations.png';
 
-const Profile = ({ profile, isAuth, status, updateStatus, id }) => {
+const Profile = ({ profile, isAuth, status, updateStatus, id, userId, updateUserAvatarThunk }) => {
+    const [owner, setOwner] = useState(false);
+    const [visible, setVisible] = useState(false);
+
+    const changeAvatarHandler = (e) => {
+        if (e.target.files.length) {
+            updateUserAvatarThunk(e.target.files[0]);
+            setVisible(false);
+        }
+    }
+
+    const isOwner = () => {
+        if (id == userId) {
+            setOwner(true);
+        }
+    }
+
+    useEffect(() => {
+        isOwner();
+    }, [id])
 
     if (!profile) {
         return <Preloader />
@@ -27,7 +46,8 @@ const Profile = ({ profile, isAuth, status, updateStatus, id }) => {
                     <p className={styles.text}>Vk: <a href={profile.contacts.vk}>{profile.contacts.vk}</a></p>
                     <p className={styles.text}>{`Статус поиска работы: ${profile.lookingForAJob ? 'Ищу' : 'Нет'}`}</p>
                     <p className={styles.text}>{`Рабочий статус: ${profile.lookingForAJobDescription}`}</p>
-                    <p className={styles.text}>Website: none</p>
+                    {owner && <button onClick={() => setVisible(true)}>Сменить аватар</button>}
+                    {visible && <input type='file' onChange={changeAvatarHandler}/>}
                 </div>
             </div>
             <MyPostsContainer />

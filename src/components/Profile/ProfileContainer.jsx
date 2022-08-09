@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import {
     setUserProfile,
     setUserProfileThunk,
-    setUserStatusThunk,
+    setUserStatusThunk, updateUserAvatarThunk,
     updateUserStatusThunk
 } from "../../redux/profile-reducer";
 import {useParams} from "react-router-dom";
@@ -16,6 +16,7 @@ import {compose} from "redux";
 const ProfileContainer = (props) => {
         const {id} = useParams();
 
+
         useEffect(() => {
             props.setUserProfileThunk(id);
             props.setUserStatusThunk(id);
@@ -23,7 +24,8 @@ const ProfileContainer = (props) => {
 
         return (
             <Profile setUserProfile={props.setUserProfile} profile={props.profile} isAuth={props.isAuth}
-                     status={props.status} updateStatus={props.updateUserStatusThunk} id={id}/>
+                     status={props.status} updateStatus={props.updateUserStatusThunk} id={id} userId={props.userId}
+                     updateUserAvatarThunk={props.updateUserAvatarThunk} />
         );
     }
 ;
@@ -33,10 +35,17 @@ let mapStateToProps = (state) => ({
     profile: state.profileReducer.profile,
     status: state.profileReducer.status,
     isAuth: state.auth.isAuth,
+    userId: state.auth.userId
 })
 
 
 export default compose(
-    connect(mapStateToProps, {setUserProfile, setUserProfileThunk, setUserStatusThunk, updateUserStatusThunk}),
+    connect(mapStateToProps, {
+        setUserProfile,
+        setUserProfileThunk,
+        setUserStatusThunk,
+        updateUserStatusThunk,
+        updateUserAvatarThunk
+    }),
     authRedirect,
 )(ProfileContainer);
