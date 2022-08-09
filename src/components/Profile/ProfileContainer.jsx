@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import {
     setUserProfile,
     setUserProfileThunk,
-    setUserStatusThunk, updateUserAvatarThunk,
+    setUserStatusThunk, updateUserAvatarThunk, updateUserContactsThunk, updateUserProfileThunk,
     updateUserStatusThunk
 } from "../../redux/profile-reducer";
 import {useParams} from "react-router-dom";
@@ -25,7 +25,9 @@ const ProfileContainer = (props) => {
         return (
             <Profile setUserProfile={props.setUserProfile} profile={props.profile} isAuth={props.isAuth}
                      status={props.status} updateStatus={props.updateUserStatusThunk} id={id} userId={props.userId}
-                     updateUserAvatarThunk={props.updateUserAvatarThunk} />
+                     updateUserAvatarThunk={props.updateUserAvatarThunk} updateUserProfileThunk={props.updateUserProfileThunk}
+            login={props.login}
+            />
         );
     }
 ;
@@ -35,7 +37,8 @@ let mapStateToProps = (state) => ({
     profile: state.profileReducer.profile,
     status: state.profileReducer.status,
     isAuth: state.auth.isAuth,
-    userId: state.auth.userId
+    userId: state.auth.userId,
+    login: state.auth.login
 })
 
 
@@ -45,7 +48,8 @@ export default compose(
         setUserProfileThunk,
         setUserStatusThunk,
         updateUserStatusThunk,
-        updateUserAvatarThunk
+        updateUserAvatarThunk,
+        updateUserProfileThunk
     }),
     authRedirect,
 )(ProfileContainer);

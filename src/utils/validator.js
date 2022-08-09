@@ -14,3 +14,7 @@ export const myPostsValidator = (value) => {
     if (value) return undefined
     return "Это поле обязательно к заполнению";
 }
+
+export const ProfileValidator = (value) => {
+    if (value && value.length > 45) return `Max length is 45 symbols`;
+}

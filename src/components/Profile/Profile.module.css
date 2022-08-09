@@ -26,3 +26,14 @@
     margin-bottom: 30px;
 }
 
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    gap: 10px;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+}

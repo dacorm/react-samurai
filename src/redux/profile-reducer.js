@@ -20,6 +20,8 @@ const profileReducer = (state = initialState, action) => {
         stateCopy.status = action.status
     } else if (action.type === 'SET_USER_AVATAR') {
         stateCopy.profile.photos = action.photos
+    } else if (action.type === 'SET_USER_CONTACTS') {
+        stateCopy.profile.contacts = action.contacts
     }
 
     return stateCopy
@@ -40,6 +42,10 @@ export const setUserStatus = (status) => {
 
 export const setUserAvatar = (photos) => {
     return {type: 'SET_USER_AVATAR', photos}
+}
+
+export const setUserContacts = (contacts) => {
+    return {type: 'SET_USER_CONTACTS', contacts}
 }
 
 export const setUserProfileThunk = (userId) => (dispatch) => {
@@ -89,10 +95,29 @@ export const updateUserAvatarThunk = (photos) => (dispatch) => {
         }
     })
         .then(response => {
-            console.log('notez')
             if (response.data.resultCode === 0) {
-                console.log('ez')
                 dispatch(setUserAvatar(response.data.data.photos))
+            }
+        })
+}
+
+export const updateUserProfileThunk = (profile) => (dispatch) => {
+    axios.put(`https://social-network.samuraijs.com/api/1.0/profile/`, {
+        userId: profile.userId,
+        AboutMe: profile.aboutMe,
+        lookingForAJob: profile.lookingForAJob,
+        LookingForAJobDescription: profile.lookingForAJobDescription,
+        fullName: profile.fullName,
+        contacts: profile.contacts,
+    }, {
+        withCredentials: true,
+        headers: {
+            "API-KEY": "a2436f78-f724-455c-84e1-5fdca026437d"
+        }
+    })
+        .then(response => {
+            if (response.data.resultCode === 0) {
+                dispatch(setUserProfileThunk(profile.userId))
             }
         })
 }
