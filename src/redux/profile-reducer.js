@@ -37,12 +37,20 @@ export const setUserStatus = (status) => {
 }
 
 export const setUserProfileThunk = (userId) => (dispatch) => {
-    axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId ?? 2}`)
+    axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId ?? 2}`, {
+        headers: {
+            "API-KEY": "a2436f78-f724-455c-84e1-5fdca026437d"
+        }
+    })
         .then(response => dispatch(setUserProfile(response.data)))
 }
 
 export const setUserStatusThunk = (userId) => (dispatch) => {
-    axios.get(`https://social-network.samuraijs.com/api/1.0/profile/status/${userId}`)
+    axios.get(`https://social-network.samuraijs.com/api/1.0/profile/status/${userId}`, {
+        headers: {
+            "API-KEY": "a2436f78-f724-455c-84e1-5fdca026437d"
+        }
+    })
         .then(response => dispatch(setUserStatus(response.data)))
 }
 

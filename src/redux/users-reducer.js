@@ -76,7 +76,10 @@ export const toggleFollowingProgress = (followingInProgress, userId) => ({type: 
 export const getUsersThunk = (currentPage, pageSize) => (dispatch) => {
     dispatch(setFetching(true));
     axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${pageSize}`, {
-        withCredentials: true
+        withCredentials: true,
+        headers: {
+            "API-KEY": "a2436f78-f724-455c-84e1-5fdca026437d"
+        }
     }).then(response => {
         dispatch(setFetching(false));
         dispatch(setUsers(response.data.items));
