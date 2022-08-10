@@ -4,9 +4,22 @@ import userIcon from './png-clipart-businessperson-computer-icons-avatar-avatar-
 import Preloader from "../Preloader/Preloader";
 import {NavLink} from "react-router-dom";
 import Paggination from "../Paggination/Paggination";
+import {UserType} from "../../redux/users-reducer";
 
+type UsersProps = {
+    currentPage: number
+    pageSize: number
+    totalUsersCount: number
+    users: UserType[]
+    getUsersThunk: (currentPage: number, pageSize: number) => void
+    setCurrentPage: (pageNumber: number) => void
+    isFetching: boolean
+    followingInProgress: number[]
+    unfollowThunk: (id: number) => void
+    followThunk: (id: number) => void
+}
 
-const Users = (props) => {
+const Users: React.FC<UsersProps> = (props) => {
 
     useEffect(() => {
         if (props.users.length === 0) {
@@ -14,7 +27,7 @@ const Users = (props) => {
         }
     }, [])
 
-    const setPage = (pageNumber) => {
+    const setPage = (pageNumber: number) => {
         props.getUsersThunk(pageNumber, props.pageSize)
         props.setCurrentPage(pageNumber);
     }
@@ -25,7 +38,7 @@ const Users = (props) => {
             <h1>Users</h1>
             {props.isFetching && <Preloader/>}
                 <Paggination currentPage={props.currentPage} onPageChanged={setPage}
-                             totalItemsCount={props.totalUsersCount} pageSize={props.pageSize} />
+                             totalItemsCount={props.totalUsersCount} pageSize={props.pageSize} portionSize={10} />
             {
                 props.users.map(u =>
                     (
@@ -55,7 +68,7 @@ const Users = (props) => {
                                     <p className={s.name}>{u.name}</p>
                                     <p className={s.desc}>{u.status}</p>
                                 </div>
-                                <p className={s.city}>{u?.location?.city != null ? u.location.city : 'Russia'}</p>
+                                <p className={s.city}>{'Russia'}</p>
                             </div>
                         </div>
                     ))

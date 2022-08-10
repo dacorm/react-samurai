@@ -7,7 +7,7 @@ type MessageType = {
     id: number | string
 }
 
-type UsersType = {
+export type UsersType = {
     name: string
     id: number
 }
@@ -50,4 +50,5 @@ export const addMessageActionCreator = () => {
 
 
 export default dialogsReducer
+export type InitialStateType = typeof initialState;
 type ActionsType = InferActionsTypes<typeof actions>

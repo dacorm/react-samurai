@@ -4,12 +4,19 @@ import {Field, Form} from 'react-final-form';
 import {required} from "../../utils/validator";
 import Element from "../../hoc/formValidation";
 import {connect} from "react-redux";
-import {authThunk, loginThunk} from "../../redux/auth-reducer.ts";
+import {authThunk, loginThunk} from "../../redux/auth-reducer";
 import {useNavigate} from "react-router-dom";
+import {AppStateType} from "../../redux/redux-store";
 
 const Input = Element('input')
 
-const LoginForm = ({ onSubmit }) => {
+type LoginFormProps = {
+    onSubmit: (formData: LoginFormData) => void
+    loginThunk: (email: string | null, password: string | null, rememberMe: boolean) => void
+    authThunk: () => void
+}
+
+const LoginForm: React.FC<LoginFormProps> = ({ onSubmit, loginThunk, authThunk }) => {
 
     return (
             <Form
@@ -29,10 +36,23 @@ const LoginForm = ({ onSubmit }) => {
         );
 };
 
-const Login = ({ id, isAuth, loginThunk, authThunk }) => {
+type LoginProps = {
+    id: number | null
+    isAuth: boolean
+    loginThunk: (email: string | null, password: string | null, rememberMe: boolean) => void
+    authThunk: () => void
+}
+
+type LoginFormData = {
+    email: string
+    password: string
+    rememberMe: boolean
+}
+
+const Login: React.FC<LoginProps> = ({ id, isAuth, loginThunk, authThunk }) => {
     const navigate = useNavigate();
 
-    const onSubmit = (formData) => {
+    const onSubmit = (formData: LoginFormData) => {
        loginThunk(formData.email, formData.password, formData.rememberMe)
     }
 
@@ -48,7 +68,7 @@ const Login = ({ id, isAuth, loginThunk, authThunk }) => {
     );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: AppStateType) => ({
     isAuth: state.auth.isAuth,
     login: state.auth.login,
     id: state.auth.userId

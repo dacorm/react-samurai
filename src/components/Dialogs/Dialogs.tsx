@@ -1,18 +1,38 @@
 import React from 'react';
 import styles from './Dialogs.module.css';
-import Message from "../Message/Message";
+import Message, {MessageProps} from "../Message/Message";
 import Dialog from "../Dialog/Dialog";
 import {Field, Form} from "react-final-form";
+import {InitialStateType, UsersType} from "../../redux/dialogs-reducer";
 
-const Dialogs = (props) => {
+type PropsType = {
+    dialogsPage: InitialStateType
+    sendMessage: () => void
+    updateMessage: (text: string) => void
+    users: UsersType[]
+}
+
+type dialogsFormProp = {
+    handleMessageSubmit: (values: NewMessageFormValuesType) => void
+}
+
+export type NewMessageFormValuesType = {
+    message: string
+}
+
+type messageFormData = {
+    message: string
+}
+
+const Dialogs: React.FC<PropsType> = (props) => {
 
     const state = props.dialogsPage
-    const userElements = state.users.map(user => <Dialog name={user.name} id={`${user.id}`} key={user.id}/>);
+    // @ts-ignore
     const messageElements = state.message.map(msg => <Message author={msg.author} text={msg.text} id={msg.id} key={msg.id} />)
 
-    const DialogsForm = ({ handleMessageSubmit }) => {
+    const DialogsForm: React.FC<dialogsFormProp> = ({ handleMessageSubmit }) => {
 
-        const onSubmit = (formData) => {
+        const onSubmit = (formData: messageFormData) => {
             handleMessageSubmit(formData)
         }
 
@@ -30,20 +50,15 @@ const Dialogs = (props) => {
     };
 
 
-    const handleMessageSubmit = (values) => {
+    const handleMessageSubmit = (values: NewMessageFormValuesType) => {
         props.updateMessage(values.message);
         props.sendMessage();
     }
 
     return (
         <div className={styles.dialogs}>
-            <h2>Dialogs</h2>
+            <h2 className={styles.dialogsTitle}>Dialogs</h2>
         <div className={styles.wrapper}>
-        <div className={styles.names}>
-            {
-                userElements
-            }
-        </div>
         <div className={styles.dialog}>
             {
                 messageElements

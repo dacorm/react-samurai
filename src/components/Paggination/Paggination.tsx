@@ -1,7 +1,15 @@
 import React, {useState} from 'react';
 import s from "./Paggination.module.css";
 
-const Paggination = ({totalItemsCount, pageSize, currentPage, onPageChanged, portionSize = 10}) => {
+type PaggintationProps = {
+    totalItemsCount: number
+    pageSize: number
+    currentPage: number
+    onPageChanged: (p: number) => void
+    portionSize: number
+}
+
+const Paggination: React.FC<PaggintationProps> = ({totalItemsCount, pageSize, currentPage, onPageChanged, portionSize = 10}) => {
 
     let pagesCount = Math.ceil(totalItemsCount / pageSize);
 

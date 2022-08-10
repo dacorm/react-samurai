@@ -11,10 +11,11 @@ import {
     toggleFollowingProgress,
     getUsersThunk, unfollowThunk, followThunk
 } from "../../redux/users-reducer";
+import {AppStateType} from "../../redux/redux-store";
 
 
 
-let mapStateToProps = (state) => {
+let mapStateToProps = (state: AppStateType) => {
     return {
         users: state.usersPage.users,
         pageSize: state.usersPage.pageSize,

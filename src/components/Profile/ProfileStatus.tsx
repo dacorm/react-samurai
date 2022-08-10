@@ -1,6 +1,12 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
-const ProfileStatus = ({status, updateStatus, id}) => {
+type ProfileStatusType = {
+    status: string
+    updateStatus: (status: string) => void
+    id: string | undefined
+}
+
+const ProfileStatus: React.FC<ProfileStatusType> = ({status, updateStatus, id}) => {
     const [visible, setVisible] = useState(false);
     const [userStatus, setUserStatus] = useState(status);
 

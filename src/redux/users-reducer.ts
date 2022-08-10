@@ -18,7 +18,7 @@ const initialState = {
     followingInProgress: [] as Array<number>,
 };
 
-type UserType = {
+export type UserType = {
     id: number
     name: string
     status: string

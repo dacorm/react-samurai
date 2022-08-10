@@ -2,14 +2,23 @@ import styles from "./MyPosts.module.css";
 import React from "react";
 import Post from "../Post/Post";
 import {Field, Form} from "react-final-form";
-import {myPostsValidator, required} from "../../utils/validator";
+import {myPostsValidator} from "../../utils/validator";
 import Element from "../../hoc/formValidation";
+import {InitialStateType, messages} from "../../redux/profile-reducer";
 
 const TextArea = Element('textarea')
 
-const MyPostsForm = ({ handlePostSubmit }) => {
+type MyPostsFormProps = {
+    handlePostSubmit: (values: formValue) => void
+}
 
-    const onSubmit = (formData) => {
+type MyPostFormData = {
+    post: string
+}
+
+const MyPostsForm: React.FC<MyPostsFormProps> = ({ handlePostSubmit }) => {
+
+    const onSubmit = (formData: MyPostFormData) => {
         handlePostSubmit(formData)
     }
 
@@ -27,13 +36,23 @@ const MyPostsForm = ({ handlePostSubmit }) => {
     );
 };
 
-const MyPosts = (props) => {
+type MyPostsProps = {
+    profilePage: InitialStateType
+    posts: messages[]
+    sendPost: (newPostText: string) => void
+}
+
+type formValue = {
+    post: string
+}
+
+const MyPosts: React.FC<MyPostsProps> = (props) => {
     const state = props.profilePage
 
     const postElements = state.posts.map(el => <Post message={el.message} id={el.id} key={el.id} />)
 
 
-    const handlePostSubmit = (values) => {
+    const handlePostSubmit = (values: formValue) => {
         props.sendPost(values.post);
         values.post = '';
     }

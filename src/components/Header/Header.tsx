@@ -3,7 +3,15 @@ import styles from './Header.module.css';
 import {Link, NavLink, useNavigate} from "react-router-dom";
 import axios from "axios";
 
-const Header = ({ isAuth, login, setUserThunk, id, logoutThunk }) => {
+type HeaderProps = {
+    isAuth: boolean
+    login: string
+    setUserThunk: (userId: number | null) => void
+    id: number | null
+    logoutThunk: () => void
+}
+
+const Header: React.FC<HeaderProps> = ({ isAuth, login, setUserThunk, id, logoutThunk }) => {
     const navigate = useNavigate();
 
     useEffect(() => {

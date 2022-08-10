@@ -9,7 +9,7 @@ const initialState = {
     status: '' as string,
 }
 
-type messages = {
+export type messages = {
     message: string
     id: number | string
 }
@@ -23,7 +23,7 @@ type extendedProfileType = {
     contacts: contactsType,
 }
 
-type profileJson = {
+export type profileJson = {
     userId: number | null
     lookingForAJob?: boolean
     lookingForAJobDescription?: string
@@ -37,7 +37,7 @@ type profileJson = {
     website?: string
     youtube?: string
     mainLink?: string
-    photos?: object
+    photos?: any
 
 }
 
@@ -170,4 +170,5 @@ export const updateUserProfileThunk = (profile: extendedProfileType) => (dispatc
 
 export default profileReducer
 
+export type InitialStateType = typeof initialState;
 type ActionsType = InferActionsTypes<typeof actions>

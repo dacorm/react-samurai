@@ -1,6 +1,6 @@
 .wrapper {
     display: grid;
-    grid-template-columns: 200px 1fr;
+    grid-template-columns: 1fr;
 }
 
 .dialogs {
@@ -9,7 +9,10 @@
 }
 
 .dialog {
-    border-left: 1px solid blue;
+}
+
+.dialogsTitle {
+    margin-left: 15px;
 }
 
 .newpost {
@@ -30,7 +33,7 @@
     height: 30px;
     background-color: #0a880a;
     border: none;
-    margin-left: auto;
+    margin-left: 15px;
 }
 
 .title {

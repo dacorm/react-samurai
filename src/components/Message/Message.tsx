@@ -1,11 +1,18 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import styles from './Message.module.css';
 import {connect} from "react-redux";
-import {useNavigate} from "react-router-dom";
 import {authRedirect} from "../../hoc/authRedirect";
 import {compose} from "redux";
+import {AppStateType} from "../../redux/redux-store";
 
-const Message = ({ author, text, id, isAuth }) => {
+export type MessageProps = {
+    author: string
+    text: string
+    id: number | null
+    isAuth: boolean
+}
+
+const Message: React.FC<MessageProps> = ({ author, text, id, isAuth }): JSX.Element => {
 
 
     return (
@@ -19,7 +26,7 @@ const Message = ({ author, text, id, isAuth }) => {
     )
 }
 
-let mapStateToProps = (state) => ({
+let mapStateToProps = (state: AppStateType) => ({
     isAuth: state.auth.isAuth,
 })
 
