@@ -13,9 +13,15 @@
 .button {
     width: 100px;
     height: 30px;
-    background-color: #0a880a;
+    background-color: #002140;
     border: none;
     margin-left: auto;
+    color: wheat
+}
+
+.button:hover {
+    cursor: pointer;
+    background-color: #1890ff;
 }
 
 .posts {

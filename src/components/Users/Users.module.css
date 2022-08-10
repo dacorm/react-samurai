@@ -1,7 +1,8 @@
 .button {
     width: 100px;
     height: 30px;
-    background-color: #0a880a;
+    background-color: #002140;
+    color: wheat;
     border: none;
     margin-left: auto;
     margin-top: 15px;
@@ -45,7 +46,8 @@
 .buttonShow {
     width: 150px;
     height: 50px;
-    background-color: #0a880a;
+    background-color: #002140;
+    color: wheat;
     border: none;
     margin: 10px 300px;
 }
@@ -53,7 +55,7 @@
 .pagBtn {
     width: 30px;
     height: 20px;
-    background-color: #0a880a;
+    background-color: #002140;
     border: none;
     margin-right: 5px;
     margin-bottom: 25px;

@@ -63,7 +63,9 @@ const Login: React.FC<LoginProps> = ({ id, isAuth, loginThunk, authThunk }) => {
     return (
         <div>
             <h1>Login</h1>
+            <div className={styles.container}>
             <LoginForm onSubmit={onSubmit} loginThunk={loginThunk} authThunk={authThunk} />
+            </div>
         </div>
     );
 };
