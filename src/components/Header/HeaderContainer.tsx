@@ -1,9 +1,11 @@
 import React, {useEffect} from 'react';
 import Header from "./Header";
 import axios from "axios";
-import {connect} from "react-redux";
+import {connect, useSelector} from "react-redux";
 import {authThunk, loginThunk, logoutThunk, setUserData, setUserProfile, setUserThunk} from "../../redux/auth-reducer";
 import {AppStateType} from "../../redux/redux-store";
+import {selectIsAuth} from "../../redux/auth-selectors";
+import {AnyAction} from "redux";
 
 type HeaderProps = {
     authThunk: () => void
@@ -11,7 +13,7 @@ type HeaderProps = {
     login: string
     setUserThunk: (userId: number | null) => void
     id: number | null
-    logoutThunk: () => void
+    logoutThunk: () => AnyAction
 }
 
 const HeaderContainer: React.FC<HeaderProps> = (props) => {
@@ -33,5 +35,9 @@ const mapStateToProps = (state: AppStateType) => ({
 
 
 export default connect(mapStateToProps, {setUserData, setUserProfile,
+    authThunk,
+    setUserThunk,
+    loginThunk,
+    logoutThunk})
     // @ts-ignore
-    authThunk, setUserThunk, loginThunk, logoutThunk})(HeaderContainer);
+    (HeaderContainer);

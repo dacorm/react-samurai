@@ -1,5 +1,6 @@
 import axios from "axios";
-import {InferActionsTypes} from "./redux-store";
+import {BaseThunkType, InferActionsTypes} from "./redux-store";
+import {FormAction} from 'redux-form/lib/actions';
 
 const SET_USER_DATA = 'SET_USER_DATA';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
@@ -76,7 +77,6 @@ export const loginThunk = (email: string | null, password: string | null, rememb
         withCredentials: true
     })
         .then(response => {
-            console.log(response)
             if (response.data.resultCode === 0) {
                 dispatch(authThunk())
             }

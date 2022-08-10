@@ -17,7 +17,6 @@ const Navbar = () => {
         fetchId();
     }, [])
 
-    console.log(id)
     return (
         <nav className={styles.nav}>
             <NavLink to={`/profile/${id ?? 2}`}
