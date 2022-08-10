@@ -1,19 +1,28 @@
 import axios from "axios";
+import {InferActionsTypes} from "./redux-store";
 
 const SET_USER_DATA = 'SET_USER_DATA';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const RESET_USER_DATA = 'RESET_USER_DATA';
 
+export type profileType = {
+    userId: number | null;
+    email: string | null;
+    login: string | null;
+    isAuth: boolean;
+}
+
 const initialState = {
-    userId: null,
-    email: null,
-    login: null,
+    profile: null as null | profileType,
+    userId: null  as (number | null),
+    email: null as string | null,
+    login: null as string | null,
     isAuth: false,
     // isFetching: false,
 };
 
 
-const authReducer = (state = initialState, action) => {
+const authReducer = (state = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
         case SET_USER_DATA:
             return {
@@ -36,12 +45,17 @@ const authReducer = (state = initialState, action) => {
     }
 }
 
+export const actions = {
+    setUserData: (userId: number | null, email: string | null, login: string | null) => ({type: 'SET_USER_DATA', data: {userId, email, login}}) as const,
+    setUserProfile: (profile: profileType) => ({type: SET_USER_PROFILE, profile}) as const,
+    resetUserData: (userId: number | null, email: string | null, login: string | null) => ({type: RESET_USER_DATA, data: {userId, email, login}}) as const
+}
 
-export const setUserData = (userId, email, login) => ({type: 'SET_USER_DATA', data: {userId, email, login}})
-export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile})
-export const resetUserData = (userId, email, login) => ({type: RESET_USER_DATA, data: {userId, email, login}})
+export const setUserData = (userId: number | null, email: string | null, login: string | null) => ({type: 'SET_USER_DATA', data: {userId, email, login}})
+export const setUserProfile = (profile: string) => ({type: SET_USER_PROFILE, profile})
+export const resetUserData = (userId: number | null, email: string | null, login: string | null) => ({type: RESET_USER_DATA, data: {userId, email, login}})
 
-export const authThunk = () => (dispatch) => {
+export const authThunk = () => (dispatch: any) => {
     axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
         withCredentials: true
     }).then(response => {
@@ -52,12 +66,12 @@ export const authThunk = () => (dispatch) => {
     })
 }
 
-export const setUserThunk = (userId) => (dispatch) => {
+export const setUserThunk = (userId: number | null) => (dispatch: any) => {
     axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
         .then(response => dispatch(setUserProfile(response.data)))
 }
 
-export const loginThunk = (email, password, rememberMe = false) => (dispatch) => {
+export const loginThunk = (email: string | null, password: string | null, rememberMe = false) => (dispatch: any) => {
     axios.post(`https://social-network.samuraijs.com/api/1.0/auth/login`, {email, password, rememberMe}, {
         withCredentials: true
     })
@@ -69,7 +83,7 @@ export const loginThunk = (email, password, rememberMe = false) => (dispatch) =>
         })
 }
 
-export const logoutThunk = () => (dispatch) => {
+export const logoutThunk = () => (dispatch: any) => {
     axios.delete(`https://social-network.samuraijs.com/api/1.0/auth/login`, {
         withCredentials: true
     })
@@ -82,3 +96,6 @@ export const logoutThunk = () => (dispatch) => {
 }
 
 export default authReducer;
+
+export type InitialStateType = typeof initialState;
+type ActionsType = InferActionsTypes<typeof actions>

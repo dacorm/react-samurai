@@ -4,7 +4,7 @@ import {Field, Form} from 'react-final-form';
 import {required} from "../../utils/validator";
 import Element from "../../hoc/formValidation";
 import {connect} from "react-redux";
-import {authThunk, loginThunk} from "../../redux/auth-reducer";
+import {authThunk, loginThunk} from "../../redux/auth-reducer.ts";
 import {useNavigate} from "react-router-dom";
 
 const Input = Element('input')

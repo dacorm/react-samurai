@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import Header from "./Header";
 import axios from "axios";
 import {connect} from "react-redux";
-import {authThunk, loginThunk, logoutThunk, setUserData, setUserProfile, setUserThunk} from "../../redux/auth-reducer";
+import {authThunk, loginThunk, logoutThunk, setUserData, setUserProfile, setUserThunk} from "../../redux/auth-reducer.ts";
 
 const HeaderContainer = (props) => {
 

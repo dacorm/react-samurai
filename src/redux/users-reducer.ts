@@ -1,4 +1,5 @@
 import axios from "axios";
+import {InferActionsTypes} from "./redux-store";
 
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
@@ -9,15 +10,28 @@ const SET_FETCHING = 'SET_FETCHING';
 const TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE_IS_FOLLOWING_PROGRESS';
 
 const initialState = {
-    users: [ ],
+    users: [ ] as Array<UserType>,
     pageSize: 5,
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: false,
-    followingInProgress: [],
+    followingInProgress: [] as Array<number>,
 };
 
-const usersReducer = (state = initialState, action) => {
+type UserType = {
+    id: number
+    name: string
+    status: string
+    photos: PhotosType
+    followed: boolean
+}
+
+export type PhotosType = {
+    small: string | null
+    large: string | null
+}
+
+const usersReducer = (state = initialState, action: ActionsType) => {
     switch(action.type) {
         case FOLLOW:
             return {
@@ -64,16 +78,25 @@ const usersReducer = (state = initialState, action) => {
     }
 }
 
+export const actions = {
+    follow: (userId: number) => ({type: FOLLOW, userId }) as const,
+    unfollow: (userId: number) => ({type: UNFOLLOW, userId }) as const,
+    setCurrentPage: (currentPage: number) => ({type: SET_CURRENT_PAGE, currentPage }) as const,
+    setUsers: (users: UserType[]) => ({type: SET_USERS, users }) as const,
+    setTotalUsersCount: (totalUsersCount: number) => ({type: SET_TOTAL_USERS_COUNT, totalUsersCount}) as const,
+    setFetching: (isFetching: boolean) => ({type: SET_FETCHING, isFetching}) as const,
+    toggleFollowingProgress: (followingInProgress: boolean, userId: number) => ({type: TOGGLE_IS_FOLLOWING_PROGRESS, followingInProgress, userId}) as const
+}
 
-export const follow = (userId) => ({type: FOLLOW, userId })
-export const unfollow = (userId) => ({type: UNFOLLOW, userId })
-export const setCurrentPage = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage })
-export const setUsers = (users) => ({type: SET_USERS, users })
-export const setTotalUsersCount = (totalUsersCount) => ({type: SET_TOTAL_USERS_COUNT, totalUsersCount})
-export const setFetching = (isFetching) => ({type: SET_FETCHING, isFetching})
-export const toggleFollowingProgress = (followingInProgress, userId) => ({type: TOGGLE_IS_FOLLOWING_PROGRESS, followingInProgress, userId})
+export const follow = (userId: number) => ({type: FOLLOW, userId })
+export const unfollow = (userId: number) => ({type: UNFOLLOW, userId })
+export const setCurrentPage = (currentPage: number) => ({type: SET_CURRENT_PAGE, currentPage })
+export const setUsers = (users: UserType[]) => ({type: SET_USERS, users })
+export const setTotalUsersCount = (totalUsersCount: number) => ({type: SET_TOTAL_USERS_COUNT, totalUsersCount})
+export const setFetching = (isFetching: boolean) => ({type: SET_FETCHING, isFetching})
+export const toggleFollowingProgress = (followingInProgress: boolean, userId: number) => ({type: TOGGLE_IS_FOLLOWING_PROGRESS, followingInProgress, userId})
 
-export const getUsersThunk = (currentPage, pageSize) => (dispatch) => {
+export const getUsersThunk = (currentPage: number, pageSize: number) => (dispatch: any) => {
     dispatch(setFetching(true));
     axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${pageSize}`, {
         withCredentials: true,
@@ -87,7 +110,7 @@ export const getUsersThunk = (currentPage, pageSize) => (dispatch) => {
     })
 }
 
-export const unfollowThunk = (userId) => (dispatch) => {
+export const unfollowThunk = (userId: number) => (dispatch: any) => {
     dispatch(toggleFollowingProgress(true, userId));
     axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`, {
         withCredentials: true,
@@ -102,7 +125,7 @@ export const unfollowThunk = (userId) => (dispatch) => {
     })
 }
 
-export const followThunk = (userId) => (dispatch) => {
+export const followThunk = (userId: number) => (dispatch: any) => {
     dispatch(toggleFollowingProgress(true, userId));
     axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`, {}, {
         withCredentials: true,
@@ -118,3 +141,4 @@ export const followThunk = (userId) => (dispatch) => {
 }
 
 export default usersReducer;
+type ActionsType = InferActionsTypes<typeof actions>
