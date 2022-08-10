@@ -112,7 +112,8 @@ export const updateUserProfileThunk = (profile) => (dispatch) => {
     }, {
         withCredentials: true,
         headers: {
-            "API-KEY": "a2436f78-f724-455c-84e1-5fdca026437d"
+            "API-KEY": "a2436f78-f724-455c-84e1-5fdca026437d",
+            "Content-Type": "application/json"
         }
     })
         .then(response => {
