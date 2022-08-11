@@ -15,6 +15,7 @@ import styles from "./components/Navbar/Navbar.module.css";
 import axios from "axios";
 import {useDispatch} from "react-redux";
 import {authThunk} from "./redux/auth-reducer";
+import ChatPage from "./components/ChatPage/ChatPage";
 
 const {SubMenu} = Menu
 const {Content, Footer, Sider} = Layout
@@ -67,6 +68,8 @@ function App() {
                                                             className={({isActive}) => isActive ? `${styles.item} ${styles.active}` : `${styles.item}`}>Messages</NavLink></Menu.Item>
                                 <Menu.Item key="3"><NavLink to='users'
                                                             className={({isActive}) => isActive ? `${styles.item} ${styles.active}` : `${styles.item}`}>Users</NavLink></Menu.Item>
+                                <Menu.Item key="4"><NavLink to='/chat'
+                                                            className={({isActive}) => isActive ? `${styles.item} ${styles.active}` : `${styles.item}`}>Chat</NavLink></Menu.Item>
                             </SubMenu>
                         </Menu>
                     </Sider>
@@ -83,6 +86,7 @@ function App() {
                             <Route path='dialogs' element={<DialogsContainer/>}/>
                             <Route path='/login' element={<Login/>}/>
                             <Route path='users' element={<UsersContainer/>}/>
+                            <Route path='/chat' element={<ChatPage />}/>
                         </Routes>
 
                     </Content>
