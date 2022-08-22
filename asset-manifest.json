@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/react-samurai/static/css/main.dff45c0b.css",
-    "main.js": "/react-samurai/static/js/main.dae7cdb7.js",
+    "main.css": "/react-samurai/static/css/main.7948aa34.css",
+    "main.js": "/react-samurai/static/js/main.c074a00e.js",
     "static/media/sPealEpjFy0.jpg": "/react-samurai/static/media/sPealEpjFy0.28542be7e2ea5906b4f0.jpg",
     "static/media/png-clipart-businessperson-computer-icons-avatar-avatar-heroes-public-relations.png": "/react-samurai/static/media/png-clipart-businessperson-computer-icons-avatar-avatar-heroes-public-relations.b0631ea7bd37c9ccba4f.png",
     "static/media/preloader.svg": "/react-samurai/static/media/preloader.ea356991b1c2fb4775312a4c61f7a20d.svg",
     "index.html": "/react-samurai/index.html",
-    "main.dff45c0b.css.map": "/react-samurai/static/css/main.dff45c0b.css.map",
-    "main.dae7cdb7.js.map": "/react-samurai/static/js/main.dae7cdb7.js.map"
+    "main.7948aa34.css.map": "/react-samurai/static/css/main.7948aa34.css.map",
+    "main.c074a00e.js.map": "/react-samurai/static/js/main.c074a00e.js.map"
   },
   "entrypoints": [
-    "static/css/main.dff45c0b.css",
-    "static/js/main.dae7cdb7.js"
+    "static/css/main.7948aa34.css",
+    "static/js/main.c074a00e.js"
   ]
 }
